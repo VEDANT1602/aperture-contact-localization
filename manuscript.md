@@ -1,143 +1,76 @@
-# What four, five and six rim contacts identify about an elliptical aperture
+# Timing a sixth rim contact when centering an elliptical aperture
 
-**Vedant Thaker**  
-Independent Researcher, Jeffersonville, Indiana, United States  
-Correspondence: vthaker1@asu.edu  
+Vedant Thaker  
+Independent Researcher, Jeffersonville, Indiana, USA  
+vedant.thaker1602@gmail.com
+
 21 November 2026
 
-## Abstract
+### Abstract
 
-Four endpoints on perpendicular scan lines can localize an elliptical opening if the shape is known. With an unknown shape, even its center can be ambiguous. On a simulated 35° ellipse, independent chord midpoints seated 39 of 2,000 pegs and the shape-corrected midpoint seated 1,962. A fresh comparison held time and contact budgets fixed. Under a 1.8 s deadline, a known-shape least-squares estimate seated 1,998 pegs with five contacts and 335 with six. The sixth reading often exhausted the correction time. When the deadline rose to 2.1 s, known-shape and freely fitted six-point ellipses seated 2,000 and 1,758, respectively. A separate optical check used intensity crossings on 20 photographed ring-board frames. The median of per-image median center errors was 0.460 pixels for independent midpoints and 0.435 for the annotation-shape correction. The photographs test rim geometry with a privileged shape prior. They provide no tactile or insertion outcomes.
+How much time should a probe spend improving the estimated center of an aperture before moving there? For an ellipse with unknown shape, four axial contacts can leave the center ambiguous. A fifth, oblique contact identifies a generic noiseless conic, while the opposite endpoint supplies redundancy. Across 3,200 simulated offsets of one ellipse, that sixth endpoint lowered median center error from 0.294 to 0.139 mm. At a center tolerance of 0.25 mm and a deadline of 1.8 s, it gained 876 on-time accurate corrections when each contact cost 0.18 s, then lost 920 when each cost 0.22 s. The change follows from the travel left after probing. A fixture-specific timing inequality makes the comparison transferable to a device once probe duration and travel speed have been measured.
 
-## What four endpoints identify
+## Four contacts can leave two different centers
 
-An off-center horizontal chord in a circle has the same horizontal midpoint as the circle center. For a rotated ellipse, motion across the scan line also changes the midpoint along the scan. This study asks which errors can be removed by interpreting the same contacts differently and when an extra contact is worth its time cost.
+A probe approaching an aperture can spend its remaining time collecting a better coordinate or moving toward the coordinate it already has. The two actions share the same deadline. This note first characterizes the shape information available from radial contacts, then derives the travel budget and tests both calculations on matched noisy ellipses. The outcome is a center estimate reached within a specified time.
 
-Contact-rich assembly systems can use compliance and active observations to handle uncertain part location [1,2]. Whitney’s analysis links geometric and force equilibria in rigid-part mating [3]. This simulation isolates an observation problem upstream of that mechanics: how to infer the center from two pairs of endpoints when shape is known.
+Take an ellipse with center c and positive-definite symmetric matrix Q, defined by (x − c)ᵀQ(x − c) = 1. Intersect it with the horizontal and vertical axes through the origin. The average horizontal intersection coordinate is mₓ = cₓ + (Qₓᵧ/Qₓₓ)cᵧ. The vertical average is mᵧ = cᵧ + (Qₓᵧ/Qᵧᵧ)cₓ. These expressions follow from the sum of the two quadratic roots along each axis. When Q is known, the two equations recover c because the coefficient determinant is det(Q)/(QₓₓQᵧᵧ) > 0. Separate midpoints are exact for axis-aligned ellipses and can be displaced for rotated ellipses.
 
-## Observation equation and conditioning
+With unknown Q the four measured points need not identify even the center. The four intersections (−1, 0), (3, 0), (0, −1) and (0, 3) satisfy x² + 2bxy + y² − 2x − 2y − 3 = 0 for every |b| < 1. The centers at b = 0 and b = 1/2 are (1, 1) and (2/3, 2/3), respectively. A fifth generic point adds the remaining projective conic constraint [1]. Noise can make the resulting center ill-conditioned. The sixth-contact comparison below uses the same ellipse-constrained least-squares estimator [2] at both sample sizes.
 
-Let c = (cₓ, cᵧ) be the unknown center and let Q be the symmetric positive-definite matrix obtained by rotating diag(1/a², 1/b²) into the scan frame. The rim is the set of points p satisfying (p − c)ᵀ Q (p − c) = 1. Substitution of y = 0 yields a quadratic in x. Its roots have midpoint mₓ = cₓ + (Qₓᵧ/Qₓₓ)cᵧ. The vertical scan at x = 0 gives mᵧ = cᵧ + (Qₓᵧ/Qᵧᵧ)cₓ. Writing the two equations as m = Ac defines A with unit diagonal and those two off-diagonal ratios. Its determinant equals det(Q)/(QₓₓQᵧᵧ) and is positive. When both chords exist, their midpoints therefore determine c under the given Q.
+## How long can a sixth touch take?
 
-The simulated ellipse has semiaxes 7.0 and 3.5 mm and major-axis angle 35°. The cross-axis coefficients are approximately −0.709 and −0.468. A 2 mm vertical translation with zero horizontal translation shifts the horizontal midpoint by −1.42 mm. Solving the system eliminates this deterministic bias under the correct geometry. The matrix has 2-norm condition number 3.81, so measurement perturbations still propagate. For a circle with 5 mm radius, A is the identity.
+Write τ for the duration of an approach, trigger and return cycle, k for the number of contacts, t₀ for fixed overhead, v for correction speed, and rₖ for the length of the commanded correction. A deadline D is met when kτ + t₀ + rₖ/v ≤ D. Equivalently, that fixture allows τ ≤ (D − t₀ − rₖ/v)/k. The accuracy test additionally requires the fitted center to fall within ε of the true center. A system with variable contact times can replace kτ by the sum of its measured cycle durations. Acceleration and overlap between travel and sensing would change the time model.
 
-A general planar conic has five independent parameters up to normalization [4]. The four axis intercepts (−1,0), (3,0), (0,−2), (0,1) give a concrete ambiguity. Every curve x² + λxy + 1.5y² − 2x + 1.5y − 3 = 0 has those intercepts. At λ = 0 the center is (1,−0.5); at λ = 1 the ellipse has center (1.5,−1). Both quadratic forms are positive definite. A fifth point in general position constrains the remaining degree of freedom. Noise and near-degenerate geometry can still make that just-determined estimate unstable.
+For illustration take D = 1.80 s, t₀ = 0.42 s, v = 30 mm/s and τ = 0.22 s. The available correction is then 8.4 mm after five contacts and 1.8 mm after six. For an ideal estimator and true offsets distributed uniformly in area over a disk of radius 4.5 mm, the latter travel radius covers (1.8/4.5)² = 16% of starts. Changing D to 2.10 s increases sixth-touch travel to 10.8 mm. These constants illustrate a crossover and have no instrument calibration.
 
-## Paired simulation and seating rule
+## A paired test with unknown shape
 
-The primary experiment drew 2,000 centers uniformly by area in each of four offset disks of radius 0.5, 2.5, 4.5 and 6.5 mm (seed 1707). Each probe searched ±12 mm from its scan origin. A chord counted as observable only when physically present with both endpoints in range. Independent Gaussian endpoint and per-coordinate tracking errors had standard deviations of 0.12 and 0.06 mm, respectively. Policies, friction settings and shapes shared draws within each radius.
+Eight independently seeded blocks of 400 fixtures use ellipses with semiaxes 7 and 3.5 mm rotated by 35°. Translation is sampled uniformly in the 4.5 mm disk. The first two probes traverse the horizontal and vertical axes. A third line at 45° passes through the coordinate defined by their measured midpoints. A fair random choice assigns one oblique endpoint as the fifth contact. The other supplies the sixth. Each probe has ±12 mm range and independent Gaussian coordinate noise with standard deviation 0.12 mm along the line. The same first five measurements enter both fits. These dimensions and error law expose the effect of oblique contacts under one geometry.
 
-The direct policy uses the nominal center. The horizontal policy applies only the first midpoint. Independent midpoints combines two nominal-axis chords. Sequential recentering moves the vertical scan to the measured horizontal midpoint. The remaining policies solve the coupled equations using either the true Q or an angle 15° too high. In this mismatch test the physical peg orientation remains aligned with the actual opening.
+The fitting code translates and scales the observed endpoints, solves for the conic with the normalization 4AC − B² = 1, and extracts the stationary point of the fitted quadratic [2]. The estimator has no access to the true axes, center or disk boundary. Error is the Euclidean distance to the true center. Correction length is measured from the initial origin to the estimated center. A fixture counts only if both its error and its modeled time meet their cutoffs. The surface spans 17 assigned contact times from 0.10 to 0.26 s, three tolerances (0.10, 0.25, 0.50 mm), and two deadlines (1.80, 2.10 s).
 
-The peg section has the same axes and orientation as the opening and is scaled by 0.92. For residual error e, let ρ = √(eᵀQe). The affine map that turns the aperture into a unit disk makes the peg a disk of radius 0.92, so exact geometric containment is equivalent to ρ ≤ 0.08. A separate lead-in assumption permits seating up to ρ = 0.18 when the assigned friction coefficient is below 0.35. Here the behavior attributed to friction is a threshold assumption rather than a fitted physical contact law. The two modeled friction values are 0.12 and 0.55.
+## Accuracy improves before timing enters
 
-Each probe costs 0.22 s. An insertion attempt costs 0.42 s plus correction distance divided by 30 mm/s, under a 1.8 s budget. Missing a required chord ends the trial after the allocated probe time. The peak-load proxy is the maximum of a 0.75 N probe load when probing occurs and a first-approach load, capped at 5 N, of 0.65 N plus 1.4 N/mm of interference beyond the clearance boundary along the correction-error ray. A zero-attempt trial has no first-approach load. These parameters prescribe how the benchmark scores time and force.
+Every fixture yielded observable endpoints and finite fitted centers. At five contacts the median and 90th-percentile errors were 0.294 and 2.052 mm. With six they were 0.139 and 0.596 mm. The five-point fit produced a long tail. Sixty-three errors exceeded 10 mm and one exceeded 2,400 mm. Two six-point errors exceeded 10 mm. All are retained. A practical system might constrain the estimated center to a calibrated work envelope.
 
-## Equal-contact comparisons
+At 0.25 mm tolerance, the purely geometric pass counts were 1,434 and 2,310. At the 1.80 s deadline, the timing model left every geometrically accurate six-contact estimate on time at τ = 0.20 s. At τ = 0.21 s only 1,602 six-contact estimates met both criteria. At 0.22 s only 514 did. The per-block net gain at 0.18 s ranged from 98 to 117 out of 400. The per-block net loss at 0.22 s ranged from 97 to 130. At those same two times the direction also reversed for the 0.10 mm and 0.50 mm tolerances.
 
-At the 4.5 mm offset radius all required chords were available on the ellipse. The four-contact shape-matched solver changed 1,924 failures of the independent-midpoint policy into successes and reversed one success. The paired difference of 96.15 percentage points has an approximate pointwise 95% Monte Carlo interval of 95.30–97.00 points, computed from the sample standard deviation of per-start differences divided by √2,000. The interval reflects variation among starts under this generator. 
 
-On the circular control, independent midpoints and the matched solver made the same decision on every trial. Both seated 1,997 of 2,000 in the corresponding strict-clearance cell. On the ellipse, allowing the low-friction lead-in increased the counts to 234 and 2,000. At a 6.5 mm offset radius under the strict rule, only 1,718 paired fixed-axis scans were observable. The coupled solver seated 1,688 pegs, or 98.3% of attempts and 84.4% of all starts.
+| Deadline (s) | Touch (s) | Both | Five only | Six only | Neither | Net six |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1.80 | 0.18 | 1,356 | 78 | 954 | 812 | +876 |
+| 1.80 | 0.21 | 1,041 | 393 | 561 | 1,205 | +168 |
+| 1.80 | 0.22 | 382 | 1,052 | 132 | 1,634 | −920 |
+| 2.10 | 0.22 | 1,356 | 78 | 954 | 812 | +876 |
+Table 1. Accuracy within 0.25 mm and correction before the deadline. Each row partitions the same 3,200 fixtures. Net six is six-only minus five-only.
 
-| Policy | Touches | Seats / 2,000 | Mean time (s) | Load proxy (N) |
-| --- | --- | --- | --- | --- |
-| Direct | 0 | 14 | 0.420 | 4.038 |
-| Horizontal only | 2 | 207 | 0.938 | 3.097 |
-| Independent midpoints | 4 | 39 | 1.410 | 2.626 |
-| Recenter second scan | 4 | 333 | 1.396 | 2.128 |
-| Matched ellipse | 4 | 1,962 | 1.401 | 0.751 |
-| Assumed angle +15° | 4 | 286 | 1.404 | 1.387 |
+![Figure 1. The fraction of 3,200 corrections within 0.25 mm of center and on time, across assigned touch durations. The two deadlines move the crossover.](study/timing-curve.png)
 
-Table 1. Primary 35° ellipse, 4.5 mm offset radius and strict clearance (μ = 0.55). Cycle times and peak proxy loads are means across all starts.
+## What would establish a hardware crossover?
 
-## Orientation error and endpoint precision
+Real probes have a finite tip, and alignment and compensation can displace a measured rim point [3]. Approach duration can also depend on the direction or distance of the next contact. The NIST peg-in-hole archive provides registered target coordinates and insertion outcomes for a different experiment [4]. It does not record the five- or six-touch sequences needed to test these estimates. No claim about insertion success or measured cycle time follows from the present note.
 
-A separate implementation draws a fresh matched sample (seed 2207) and changes the assumed angle and endpoint-noise scale jointly. At the original noise level, the independent midpoints seated 35 of 2,000 and the matched solver seated 1,975. The full grid includes ±30° errors. Table 2 shows the smaller errors most relevant to calibration. The opposite signs at 15° produce very different counts because the scanning axes remain fixed as the assumed shape rotates. The signs therefore need separate tests. Sensitivity to increased endpoint noise is also apparent at the correct angle.
-
-| Assumed minus true angle | 0.06 mm | 0.12 mm | 0.24 mm |
-| --- | --- | --- | --- |
-| −15° | 893 | 885 | 785 |
-| −5° | 1,791 | 1,676 | 1,320 |
-| 0° | 2,000 | 1,975 | 1,518 |
-| +5° | 1,627 | 1,488 | 1,126 |
-| +15° | 307 | 306 | 285 |
-
-Table 2. Seats out of 2,000 fresh synthetic starts, by endpoint standard deviation. The tracked peg is aligned. Its coordinate error stays at 0.06 mm per axis in every cell.
-
-## A matched contact and time budget
-
-In a separate paired sample (seed 21707, 2,000 starts), four fixed-axis contacts provide the two chord midpoints. For known Q, a second estimator expands the conic equation and regresses the centered values of pᵀQp on 2(p − mean(p))ᵀQ to estimate c. It can use unequal numbers of endpoints. For unknown Q, an ellipse-specific least-squares fit minimizes the algebraic residual subject to 4AC − B² = 1 [5]. Center and scale normalization condition the fit; the final center solves the fitted gradient equations. Four-point free fits are excluded by the constructive ambiguity above.
-
-The fifth contact is the first endpoint of a 45° line through the provisional independent midpoint; the sixth is its opposite endpoint. Known-shape and free-ellipse fits use exactly the same observed points. The sequential midpoint policy instead alternates horizontal, vertical, horizontal chords through the latest estimated coordinates. It has complete estimates after four or six touches. All policies share centers, endpoint-noise draws, tracking errors and the per-touch time charge. Geometry-only success checks ignore the clock; the two timed scores charge the same modeled duration to every contact. Extra travel between scan origins is omitted.
-
-With five contacts, free fitting had 1,281 geometric successes and a 19.41 mm root-mean-square center error, indicating extreme estimates on some noisy configurations. Six contacts reduced its RMS error to 0.633 mm and improved geometric seating to 1,758. Under the tighter deadline those same six contacts left little time for the center correction. The original rule permits only 1.8 mm of commanded correction after six touches (30 × (1.8 − 6 × 0.22 − 0.42)).
-
-| Touches | Estimator | Contained¹ | Seats at 1.8 s | Seats at 2.1 s |
-| --- | --- | --- | --- | --- |
-| 4 | Independent midpoints | 47 | 47 | 47 |
-| 4 | Sequential midpoints | 360 | 360 | 360 |
-| 4 | Coupled midpoints | 1,973 | 1,973 | 1,973 |
-| 4 | Known-shape LS | 1,983 | 1,983 | 1,983 |
-| 5 | Known-shape LS | 1,998 | 1,998 | 1,998 |
-| 5 | Free ellipse LS | 1,281 | 1,281 | 1,281 |
-| 6 | Sequential midpoints | 620 | 249 | 620 |
-| 6 | Known-shape LS | 2,000 | 335 | 2,000 |
-| 6 | Free ellipse LS | 1,758 | 341 | 1,758 |
-
-Table 3. Counts out of the same 2,000 starts. ¹Peg footprints geometrically contained before the time check, including tracking error. Every scheduled endpoint was observable and every listed estimator returned a finite center in this sample.
-
-## Image-plane check on photographed ring targets
-
-The calibration-pattern collection contains physical-camera images of concentric rings with manually annotated projected contours [6]. The calculation used all 20 ring-board images in the pinned JPEG distribution [7]. An annotation counted as an inner contour when a companion ellipse had a center within 3 pixels and a major semiaxis at least 1.3 times larger (strict inequality in code). This rule admitted 1,455 candidate annotations. The initial scan point was offset from the annotated center by (0.28b, −0.32b), where b is the annotated minor semiaxis. The scan searches for the first light-to-dark threshold crossing along each direction in real, bilinearly sampled grayscale pixels; it never substitutes analytical ellipse intersections. The threshold is the midpoint of the local 10th and 90th intensity percentiles. The annotation supplies localization, search scale, the reference center and, for known-shape methods only, Q.
-
-All five methods returned estimates for the same 1,437 candidate annotations. Taking the median within each image and then the median across images gave 0.460 pixels for independent midpoints, 0.435 for coupled midpoints, 0.443 for four-point known-shape least squares, 0.470 for five-point free fitting and 0.475 for six-point free fitting. For the first two estimators, per-image medians ranged from 0.412 to 0.555 and from 0.404 to 0.495 pixels. The small optical difference shows how little of the large seating contrast necessarily transfers even to another rim-localization problem. The shared annotation can favor the known-shape methods. The repeated views are clustered, and the plotted contours are not metrically surveyed aperture centers.
-
-## Scope and physical test
-
-The independent-midpoint error follows from conic geometry. The number of failed insertions depends on how often that error crosses the chosen clearance. Exact conic intersections, a known aspect ratio and an aligned rigid peg favor the matched solver. Rotation of the physical peg, bevels, compliance, ambiguous rim contacts and non-Gaussian endpoint errors would change the observation or seating law. The capped load proxy cannot test contact peaks or part damage.
-
-A physical touch study needs independent shape calibration on a second artifact, finite probe-radius correction, repeated scans at measured yaw, and a denominator that includes missing contacts. Probe alignment, mechanical filtering and tip compensation can bias a real rim measurement [8]. The optical comparison cannot estimate these effects, and assumed loads and friction thresholds do not validate contact dynamics.
+The decisive experiment pairs both fits on the same physical trajectories, compares their centers with an independent survey, and times commands through completed correction. Measuring the dependence of cycle time on approach direction would allow the per-fixture inequality to use observed durations. A held-out set of apertures would then show whether an extra touch changes the number of accurate corrections that arrive on time.
 
 ## Data and code availability
 
-The baseline repository contains the original simulation and verifier. The accompanying supplement supplies the independent replay (run.py), contact_budgets.py, photo_rims.py, all resulting CSVs and hash-locked Linux requirements. Obtain the checksum-verified ring-board archive from [7] to repeat the optical analysis. The raw photographs remain with their provider.
+The accompanying supplement provides the source, 3,200 paired fixture records, all timing tables, the reference checks and a physical replication protocol. The geometry implementation builds on the public study code at https://github.com/VEDANT1602/aperture-contact-localization/tree/564b3879d618f6053d90dfd42009a98d37b4ad89 .
 
-[Pinned baseline](https://github.com/VEDANT1602/aperture-contact-localization/tree/71f76e74192e47e6b9f4c19350aa7b4fb924cb4a) · [Revision code and data](https://github.com/VEDANT1602/aperture-contact-localization/tree/main/revision/supplement) · [Preparation record](https://github.com/VEDANT1602/aperture-contact-localization/blob/main/revision/PREPARATION.md)
+[Study files, software and source records](https://github.com/VEDANT1602/aperture-contact-localization/tree/main/study)
 
-## Computational verification
+## Author and disclosures
 
-The original re-execution matched the 96-row archived results.csv byte for byte. The independent implementation matched the 96 primary condition counts. The budget extension verifies center recovery from five and six generic noise-free points; its CSV records every method and both deadlines. The optical replay checks the image archive SHA-256 before reading measurements. Numeric checks used Python 3.12.14, NumPy 2.3.5 and Pillow 13.0.0.
+Vedant Thaker is the sole author and set the research question. OpenAI Codex assisted with developing the geometric tests, checking the timing assumptions and drafting the note.
 
-## Author contribution
-
-Vedant Thaker is the sole author. He designed the original rim-contact localization study, wrote its manuscript, developed its original software, and requested the comparisons and checks reported in this revision.
-
-## Use of computational assistance
-
-OpenAI Codex assisted with the identifiability analysis, numerical contact- and time-budget comparisons, the photographed-rim extraction and replay, and code and citation checks, as well as literature checks and preparation of the revised text. The author set the research question and requested the revision.
-
-## Funding
-
-This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
-
-## Competing interests
-
-The author declares no competing interests.
+This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors. The author declares no competing interests.
 
 ## References
 
-[1] Y. Chen, K. Kimble, H. H. Qian, P. Chanrungmaneekul, R. Seney and K. Hang. Robust Peg-in-Hole Assembly under Uncertainties via Compliant and Interactive Contact-Rich Manipulation. Robotics: Science and Systems XXI, 2025. https://doi.org/10.15607/RSS.2025.XXI.060
+[1] R. Hartley and A. Zisserman. Multiple View Geometry in Computer Vision, 2nd ed. Cambridge University Press, 2004, §2.2.3, p. 31. <https://doi.org/10.1017/CBO9780511811685>
 
-[2] S. Kim and A. Rodriguez. Active Extrinsic Contact Sensing: Application to General Peg-in-Hole Insertion. IEEE International Conference on Robotics and Automation, 2022. https://doi.org/10.1109/ICRA46639.2022.9812017
+[2] A. Fitzgibbon, M. Pilu and R. B. Fisher. Direct least square fitting of ellipses. IEEE Transactions on Pattern Analysis and Machine Intelligence 21(5), 476–480, 1999. <https://doi.org/10.1109/34.765658>
 
-[3] D. E. Whitney. Quasi-Static Assembly of Compliantly Supported Rigid Parts. Journal of Dynamic Systems, Measurement, and Control 104(1), 65–77, 1982. https://doi.org/10.1115/1.3149634
+[3] J. Stone, B. Muralikrishnan and C. Sahay. Geometric effects when measuring small holes with micro contact probes. Journal of Research of the National Institute of Standards and Technology 116(2), 573–587, 2011. <https://doi.org/10.6028/jres.116.006>
 
-[4] R. Hartley and A. Zisserman. Multiple View Geometry in Computer Vision, 2nd ed., Cambridge University Press, 2004. §2.2.3, “Five points define a conic,” pp. 30–31. https://doi.org/10.1017/CBO9780511811685
-
-[5] A. Fitzgibbon, M. Pilu and R. B. Fisher. Direct Least Square Fitting of Ellipses. IEEE Transactions on Pattern Analysis and Machine Intelligence 21(5), 476–480, 1999. https://doi.org/10.1109/34.765658
-
-[6] V. Pătrăucean, P. Gurdjos and R. Grompone von Gioi. Joint A Contrario Ellipse and Line Detection. IEEE Transactions on Pattern Analysis and Machine Intelligence 39(4), 788–802, 2017. DOI 10.1109/TPAMI.2016.2558150. Project data collection: Dataset2_CalibrationPatterns. https://github.com/viorik/ELSDc
-
-[7] zikai1 (repository maintainer). Awesome Ellipse Detection, Calibration.zip. JPEG mirror of the calibration-pattern collection and contour parameters; version 4003bef, accessed 21 November 2026. https://github.com/zikai1/Awesome-Ellipse-Detection/tree/4003bef55e929db0797a4586cf352a21c64e3ab1
-
-[8] J. A. Stone, B. Muralikrishnan and C. Sahay. Geometric Effects When Measuring Small Holes With Micro Contact Probes. Journal of Research of the National Institute of Standards and Technology 116(2), 573–587, 2011. https://doi.org/10.6028/jres.116.006
+[4] National Institute of Standards and Technology. Peg-in-Hole Data. Experimental protocol, pose files and insertion pass/fail tables. <https://doi.org/10.18434/T4/1500929>
