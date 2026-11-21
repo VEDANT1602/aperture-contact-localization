@@ -5,3 +5,7 @@ The research question and author-supplied disclosures are attributed to Vedant T
 Substitution verifies all four shared intersections and both distinct centers. A noiseless translated ellipse verifies center recovery. Independent calculations from fixture-level errors and critical touch durations reproduce every cell of the timing tables.
 
 The supplement README identifies the inputs and computations needed to inspect the numerical results. Earlier public material is retained at https://github.com/VEDANT1602/aperture-contact-localization/tree/564b3879d618f6053d90dfd42009a98d37b4ad89 .
+
+## Current work
+
+Vedant Thaker is the sole author and set the research question. OpenAI Codex assisted with the geometric example, simulation analysis, exact timing-threshold calculation and drafting.

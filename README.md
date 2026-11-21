@@ -1,12 +1,9 @@
-# Timing a sixth rim contact when centering an elliptical aperture
+# When is there time for a sixth contact? A worked example in ellipse centering
 
-Technical report by Vedant Thaker, Independent Researcher, Jeffersonville, Indiana. Correspondence: vedant.thaker1602@gmail.com.
+Worked geometry example by Vedant Thaker, Independent Researcher, Jeffersonville, Indiana, USA.
 
-How much time should a probe spend improving the estimated center of an aperture before moving there? For an ellipse with unknown shape, four axial contacts can leave the center ambiguous. A fifth, oblique contact identifies a generic noiseless conic, while the opposite endpoint supplies redundancy. Across 3,200 simulated offsets of one ellipse, that sixth endpoint lowered median center error from 0.294 to 0.139 mm. At a center tolerance of 0.25 mm and a deadline of 1.8 s, it gained 876 on-time accurate corrections when each contact cost 0.18 s, then lost 920 when each cost 0.22 s. The change follows from the travel left after probing. A fixture-specific timing inequality makes the comparison transferable to a device once probe duration and travel speed have been measured.
+A probe can spend its remaining time measuring the opposite end of a chord or moving toward its current estimate of an aperture’s center. This worked example shows how to price that choice. On 3,200 simulated translations of one ellipse, a sixth contact lowered median center error from 0.294 to 0.139 mm. Under a specified 1.8 s deadline, 30 mm/s correction speed and 0.25 mm tolerance, the sixth contact increased the count of accurate, on-time moves at 211 ms per contact and decreased it at 212 ms. The crossover can be read directly from the fitted travel lengths. Its value depends on the assigned timing model.
 
-- [Read the paper](manuscript.pdf)
-- [Read the plain-text manuscript](manuscript.md)
-- [Reproduce the analysis and inspect the source and data records](study/README.md)
-- [Software license](LICENSE) and [third-party terms](LICENSING.md)
-- [Preparation record](study/PREPARATION.md)
-- [Previous manuscript and supplements](https://github.com/VEDANT1602/aperture-contact-localization/tree/564b3879d618f6053d90dfd42009a98d37b4ad89)
+[Paper (PDF)](manuscript.pdf) · [Editable text](manuscript.md) · [Methods and study files](study/README.md) · [Manuscript history](study/VERSION.md)
+
+[Author-owned software license](LICENSE) · [Third-party terms](LICENSING.md) · [Previous version](https://github.com/VEDANT1602/aperture-contact-localization/tree/9658b3d6f050a0fcad1b7f237a9aab21c69d86f1)

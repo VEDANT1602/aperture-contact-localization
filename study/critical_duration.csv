@@ -1,0 +1,2 @@
+deadline_s,overhead_s,speed_mm_s,tolerance_mm,pairs,five_geometric,six_geometric,five_last_all_passing_tau_s,six_tie_lower_open_s,six_tie_upper_closed_s
+1.8,0.42,30.0,0.25,3200,1434,2310,0.2451187964757456,0.21139443436233005,0.21140564456519706
