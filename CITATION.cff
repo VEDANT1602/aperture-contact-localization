@@ -1,9 +1,10 @@
 cff-version: 1.2.0
-message: "Please use this citation when referring to the research software."
+message: "Please cite this software when reusing its methods."
 type: software
-title: "Four rim contacts can mislocate a rotated aperture"
+title: "What four, five and six rim contacts identify about an elliptical aperture"
 authors:
   - family-names: Thaker
     given-names: Vedant
 repository-code: "https://github.com/VEDANT1602/aperture-contact-localization"
-abstract: "Four-contact center estimation and insertion for rotated elliptical apertures."
+date-released: 2026-11-21
+license: MIT

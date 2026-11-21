@@ -1,0 +1,5 @@
+# Licensing and third-party material
+
+The root MIT license applies to the study software for which Vedant Thaker holds the rights and to its accompanying software documentation. Third-party code and data retain their applicable notices and terms. References to publications convey no license to their contents.
+
+The optical comparison uses independently obtained calibration images and reference annotations credited in revision/supplement/README.md. Their creators retain rights in the source photographs and annotations. The public supplement distributes the extraction and analysis code and study outputs, not the third-party source archive.

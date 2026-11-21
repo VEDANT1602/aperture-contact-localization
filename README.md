@@ -1,4 +1,18 @@
-# Locating a rotated oval from four rim contacts
+# What four, five and six rim contacts identify about an elliptical aperture
+
+Vedant Thaker · November 21, 2026
+
+Four endpoints on perpendicular scan lines can localize an elliptical opening if the shape is known. With an unknown shape, even its center can be ambiguous.
+
+- [Revised manuscript (PDF)](manuscript.pdf) · [Editable manuscript](manuscript.md)
+- [Revision code, results and reproduction instructions](revision/supplement/) · [Preparation record](revision/PREPARATION.md)
+- [Baseline software and results at the study commit](https://github.com/VEDANT1602/aperture-contact-localization/tree/71f76e74192e47e6b9f4c19350aa7b4fb924cb4a) · [Software license](LICENSE) · [Third-party terms](LICENSING.md)
+
+## Earlier study and reproduction instructions
+
+The following instructions and results describe the original study. The revised paper and its supplemental tests are linked above.
+
+### Locating a rotated oval from four rim contacts
 
 On a circle, the midpoint of a horizontal chord gives the center's horizontal coordinate even when the scan misses the centerline. With a rotated oval, that coordinate depends on the height of the scan. Four contacts can therefore produce a repeatable but seriously misplaced center estimate.
 
@@ -8,7 +22,7 @@ In the high-friction simulation, the same 2,000 starts were drawn within 4.5 mm 
 
 Enlarging the offset radius to 6.5 mm sometimes puts a scan line outside the aperture. The geometry-aware method seated 1,688 pegs. That is 98.3% of its 1,718 observable, attempted cases, and 84.4% of all 2,000 starts. Counting only attempts would conceal the cost of missing a chord.
 
-The simulator uses noisy probe endpoints, a fixed peg orientation and an assigned load proxy. Assessing fit and contact force on a part would require independent physical measurements. [Condition summaries](results.csv) · [Geometry and assumptions](manuscript.md) · [Paper PDF](manuscript.pdf)
+The simulator uses noisy probe endpoints, a fixed peg orientation and an assigned load proxy. Assessing fit and contact force on a part would require independent physical measurements. [Condition summaries](results.csv) · [Geometry and assumptions](https://github.com/VEDANT1602/aperture-contact-localization/blob/71f76e74192e47e6b9f4c19350aa7b4fb924cb4a/manuscript.md) · [Paper PDF](https://github.com/VEDANT1602/aperture-contact-localization/blob/71f76e74192e47e6b9f4c19350aa7b4fb924cb4a/manuscript.pdf)
 
 ## Reproduce and check
 
