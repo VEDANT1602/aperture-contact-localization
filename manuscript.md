@@ -6,6 +6,8 @@ vedant.thaker1602@gmail.com
 
 Worked geometry example
 
+**Research period (author-reported)** · October 5–21, 2026 &nbsp; | &nbsp; **Manuscript revised** · November 21, 2026
+
 ### Abstract
 
 A probe can spend its remaining time measuring the opposite end of a chord or moving toward its current estimate of an aperture’s center. This worked example shows how to price that choice. On 3,200 simulated translations of one ellipse, a sixth contact lowered median center error from 0.294 to 0.139 mm. Under a specified 1.8 s deadline, 30 mm/s correction speed and 0.25 mm tolerance, the sixth contact increased the count of accurate, on-time moves at 211 ms per contact and decreased it at 212 ms. The crossover can be read directly from the fitted travel lengths. Its value depends on the assigned timing model.
