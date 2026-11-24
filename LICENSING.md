@@ -1,10 +1,5 @@
-# Licensing and third-party material
+# Software and data rights
 
-The root MIT license applies to the study software for which Vedant Thaker holds the rights and to its accompanying software documentation. Third-party code and data retain their applicable notices and terms. References to publications convey no license to their contents.
+The MIT license covers the original study software to the extent that Vedant Thaker holds the rights.
 
-The optical comparison uses independently obtained calibration images and reference annotations credited in revision/supplement/README.md. Their creators retain rights in the source photographs and annotations. The public supplement distributes the extraction and analysis code and study outputs, not the third-party source archive.
-
-
-## Current study files
-
-The root MIT license covers the author-owned software. Study-specific attributions, acquisition instructions and any additional terms on third-party data and derivative products accompany the files under [study](study/README.md). Original source articles, images, trained model weights and participant data remain subject to their respective providers’ terms.
+The study generates ellipse parameters, contact observations and fixture timing outcomes using the included simulation. No photographs, external shapes or annotated measurements were used. The [study README](study/README.md) identifies the original implementation.
